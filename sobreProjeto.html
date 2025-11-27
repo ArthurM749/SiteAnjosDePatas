@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre o Projeto - ONG Anjos de Patas</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .sobre-projeto {
+        min-height: 80vh;
+        padding: 40px 20px;
+        padding-top: 150px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .sobre-projeto h1 {
+        color: #6B4BA6;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .sobre-projeto p {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .creditos-grupo {
+        background-color: #f5f5f5;
+        padding: 30px;
+        border-radius: 10px;
+        margin: 30px 0;
+      }
+      .creditos-grupo h2 {
+        color: #6B4BA6;
+        margin-bottom: 20px;
+      }
+      .creditos-grupo p {
+        margin: 10px 0;
+      }
+      .voltar {
+        text-align: center;
+        margin-top: 40px;
+      }
+      .voltar a {
+        color: #6B4BA6;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .voltar a:hover {
+        text-decoration: underline;
+      }
+      .participantes {
+        margin-top: 40px;
+      }
+      .participantes h2 {
+        color: #6B4BA6;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 24px;
+      }
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+      .card-participante {
+        background: white;
+        border: 2px solid #6B4BA6;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-participante:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(107, 75, 166, 0.2);
+      }
+      .foto-perfil {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 15px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 15px;
+      }
+      .foto-perfil img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .inicial {
+        background-color: #6B4BA6;
+      }
+      .card-participante h3 {
+        color: #6B4BA6;
+        margin: 15px 0;
+        font-size: 18px;
+      }
+      .contatos {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .contato-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        color: #6B4BA6;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .contato-link:hover {
+        background-color: #6B4BA6;
+        color: white;
+      }
+      .instrucoes {
+        background-color: #fff3cd;
+        border: 1px solid #ffc107;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 30px;
+        color: #856404;
+        font-size: 14px;
+      }
+      /* FOOTER */
+      footer {
+        background: linear-gradient(180deg, #6B4BA6 0%, #4b005e 100%);
+        padding: 40px 20px;
+        margin-top: 80px;
+      }
+
+      .rodape {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .rodape .icones {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .rodape .icones div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .rodape .icones img {
+        width: 50px;
+        height: 50px;
+        filter: brightness(0) invert(1);
+      }
+
+      .rodape .icones a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: 0.3s;
+      }
+
+      .rodape .icones a:hover {
+        opacity: 0.8;
+        text-decoration: underline;
+      }
+
+      .rodape .pets {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .rodape .pets img {
+        width: 80px;
+        height: auto;
+        filter: brightness(1.1);
+      }
+
+      .rodape .pets .casa {
+        width: 100px;
+      }
+
+      .rodape .creditos {
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 20px;
+      }
+
+      .rodape .creditos p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .rodape .creditos a {
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
+        font-weight: 500;
+      }
+
+      .rodape .creditos a:hover {
+        text-decoration: underline;
+        opacity: 0.9;
+      }
+
+      .rodape .circulo-roxo1,
+      .rodape .circulo-roxo2 {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.15;
+      }
+
+      .rodape .circulo-roxo1 {
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        bottom: -50px;
+        left: -100px;
+      }
+
+      .rodape .circulo-roxo2 {
+        width: 250px;
+        height: 250px;
+        background-color: #fff;
+        bottom: -80px;
+        right: -120px;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <header class="topo">
+      <nav>
+        <ul class="menu">
+          <li><img src="img/triangulo-esq.png" alt="" class="triang-esq" /></li>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="quemSomos.html">Quem Somos</a></li>
+          <li><img src="img/logo.png" alt="logo" class="img-logo" /></li>
+          <li><a href="comoAjudar.html">Como Ajudar</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><img src="img/triangulo-dir.png" alt="" class="triang-dir" /></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="sobre-projeto">
+      <h1>Sobre este Projeto</h1>
+      
+      <p>
+        Este site foi desenvolvido como um projeto acadêmico dedicado a amplificar 
+        a missão da ONG Anjos de Patas, tornando suas ações de proteção animal mais 
+        acessíveis e visíveis para a comunidade.
+      </p>
+
+      <div class="creditos-grupo">
+        <h2>Créditos do Projeto</h2>
+        <p><strong>Instituição:</strong> Univértix</p>
+        <p><strong>Curso:</strong> Ciência da Computação</p>
+        <p><strong>Período:</strong> 2º Período</p>
+        <p><strong>Disciplina:</strong> Projeto Social</p>
+        
+      </div>
+
+      <p>
+        Nossa dedicação foi transformar a visão da ONG Anjos de Patas em uma 
+        plataforma digital moderna, onde a comunidade possa conhecer melhor 
+        a instituição e suas formas de contribuir para a proteção dos animais.
+      </p>
+
+      <p style="margin-top: 30px; font-style: italic; color: #666;">
+        Este projeto reafirma nosso compromisso com a educação e a responsabilidade 
+        social, utilizando conhecimentos técnicos em favor de uma causa nobre.
+      </p>
+
+      <div class="participantes">
+        <h2>Participantes</h2>
+        <div class="cards-container">
+          <div class="card-participante">
+            <div class="foto-perfil inicial">A</div>
+            <h3>Arthur Moura</h3>
+            <div class="contatos">
+              <a href="https://github.com/ArthurM749" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">R</div>
+            <h3>Ruan Martins</h3>
+            <div class="contatos">
+              
+              
+              <a href="https://github.com/ruanmartinsq" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">G</div>
+            <h3>Gabriel Arthur</h3>
+            <div class="contatos">
+              
+              
+              <a href="https://github.com/l3riel" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">S</div>
+            <h3>Samuel Assis</h3>
+            <div class="contatos">
+              
+              
+              <a href="#" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">H</div>
+            <h3>Hugo Medeiros</h3>
+            <div class="contatos">
+              
+              
+              <a href="https://github.com/hugopmed" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">V</div>
+            <h3>Vinícius Fernandes</h3>
+            <div class="contatos">
+              
+              
+              <a href="#" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card-participante">
+            <div class="foto-perfil inicial">C</div>
+            <h3>Cauã Victorino</h3>
+            <div class="contatos">
+              
+              
+              <a href="https://github.com/cauavictorino" class="contato-link" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="voltar">
+        <p><a href="index.html">← Voltar ao site principal</a></p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="rodape">
+        <div class="icones">
+          <div class="adote">
+            <img src="img/icone1.png" alt="Ícone" />
+            <a href="contato.html">Adote</a>
+          </div>
+          <div class="apadrinhe">
+            <img src="img/icone2.png" alt="Ícone" />
+            <a href="contato.html">Apadrinhe</a>
+          </div>
+          <div class="doe">
+            <img src="img/icone3.png" alt="Ícone" />
+            <a href="contato.html">Doe</a>
+          </div>
+        </div>
+        <div class="pets">
+          <img src="img/gato-footer.png" alt="Gato" />
+          <img src="img/casa.png" alt="casa" class="casa" />
+          <img src="img/cachorro-footer.png" alt="Cachorro" />
+        </div>
+        <div class="creditos">
+          <p><a href="sobreProjeto.html">Projeto desenvolvido por alunos do 2º período de Ciência da Computação - Univértix</a></p>
+        </div>
+        <div class="circulo-roxo1"></div>
+        <div class="circulo-roxo2"></div>
+      </div>
+    </footer>
+  </body>
+</html>

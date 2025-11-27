@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quem Somos - ONG Anjos de Patas</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Estilos específicos da página Quem Somos */
+      .quem-somos-page {
+        min-height: 100vh;
+        background: linear-gradient(180deg, #fff 0%, #f8f4f9 100%);
+        padding-top: clamp(100px, 15vh, 140px);
+        padding-bottom: clamp(60px, 10vh, 100px);
+      }
+
+      .quem-somos-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .quem-somos-header {
+        text-align: center;
+        margin-bottom: clamp(40px, 8vh, 60px);
+      }
+
+      .quem-somos-header h1 {
+        color: #4b005e;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .quem-somos-header .subtitle {
+        color: #78114f;
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 500;
+      }
+
+      .quem-somos-content {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: clamp(30px, 6vw, 50px);
+        box-shadow: 0 4px 20px rgba(75, 0, 94, 0.1);
+        margin-bottom: 40px;
+      }
+
+      .quem-somos-content h2 {
+        color: #4b005e;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .quem-somos-content p {
+        color: #333;
+        line-height: 1.8;
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        margin-bottom: 20px;
+        text-align: justify;
+      }
+
+      .quem-somos-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+      }
+
+      .quem-somos-content ul li {
+        color: #333;
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        padding: 12px 0;
+        padding-left: 30px;
+        position: relative;
+      }
+
+      .quem-somos-content ul li::before {
+        content: "🐾";
+        position: absolute;
+        left: 0;
+        font-size: 1.2em;
+      }
+
+      .missao-visao-valores {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      .card-mvv {
+        background: linear-gradient(135deg, #e20988 0%, #6c146f 100%);
+        color: #fff;
+        padding: clamp(25px, 4vw, 35px);
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(81, 142, 255, 0.3);
+        transition: transform 0.3s ease;
+      }
+
+      .card-mvv:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-mvv h3 {
+        font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .card-mvv p {
+        font-size: clamp(0.9rem, 1.6vw, 1rem);
+        line-height: 1.6;
+        color: #fff;
+        text-align: center;
+      }
+
+      .equipe-section {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .equipe-section h2 {
+        color: #4b005e;
+        font-size: clamp(1.8rem, 4vw, 2.3rem);
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .equipe-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+
+      .membro-equipe {
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(75, 0, 94, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .membro-equipe:hover {
+        transform: translateY(-5px);
+      }
+
+      .membro-equipe img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 4px solid #518eff;
+      }
+
+      .membro-equipe h3 {
+        color: #4b005e;
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .membro-equipe p {
+        color: #78114f;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        margin-bottom: 0;
+      }
+
+      .cta-voltar {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .cta-voltar a {
+        display: inline-block;
+        padding: clamp(12px, 2vw, 15px) clamp(30px, 5vw, 40px);
+        background-color: #6c146f;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(108, 20, 111, 0.3);
+      }
+
+      .cta-voltar a:hover {
+        background-color: #a14ca1;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(108, 20, 111, 0.4);
+      }
+      
+      .creditos a{
+        color: #770c72;
+      }
+
+      @media (max-width: 768px) {
+        .quem-somos-content p,
+        .quem-somos-content ul li {
+          text-align: left;
+        }
+
+        .missao-visao-valores {
+          grid-template-columns: 1fr;
+        }
+
+        .equipe-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topo">
+      <nav>
+        <ul class="menu">
+          <li><img src="img/triangulo-esq.png" alt="" class="triang-esq" /></li>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="quemSomos.html" class="active">Quem Somos</a></li>
+          <li><img src="img/logo.png" alt="logo" class="img-logo" /></li>
+          <li><a href="comoAjudar.html">Como Ajudar</a></li>
+          <li><a href="galeria.html" class="active">Galeria</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><img src="img/triangulo-dir.png" alt="" class="triang-dir" /></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="quem-somos-page">
+      <div class="quem-somos-container">
+        <div class="quem-somos-header">
+          <h1>Quem Somos</h1>
+          <p class="subtitle">Conheça nossa história e propósito</p>
+        </div>
+
+        <div class="quem-somos-content">
+          <h2>Nossa História</h2>
+          <p>
+            A ONG Anjos de Patas nasceu de um sonho da Dra. Joice durante sua
+            graduação em Medicina Veterinária. O que começou como um projeto de
+            comedouros comunitários para animais de rua, rapidamente ganhou
+            força com o apoio do Dr. Salvador Sabino, que compartilhava da mesma
+            paixão por ajudar os animais em situação de vulnerabilidade.
+          </p>
+          <p>
+            Com dedicação e muito amor, o projeto cresceu e se transformou em
+            uma organização não governamental comprometida com a proteção
+            animal. Hoje, atuamos em diversas frentes para garantir que cada
+            animal receba o cuidado, respeito e dignidade que merece.
+          </p>
+
+          <h2>O Que Fazemos</h2>
+          <ul>
+            <li>
+              Resgate e cuidado de animais abandonados e em situação de risco
+            </li>
+            <li>
+              Programas de castração para controle populacional responsável
+            </li>
+            <li>Campanhas de conscientização sobre posse responsável</li>
+            <li>Apoio a adoções responsáveis e apadrinhamento de animais</li>
+            <li>Combate aos maus-tratos e defesa dos direitos dos animais</li>
+          </ul>
+        </div>
+
+        <div class="missao-visao-valores">
+          <div class="card-mvv">
+            <h3>Missão</h3>
+            <p>
+              Proteger e cuidar de animais em situação de vulnerabilidade,
+              promovendo seu bem-estar e dignidade através de ações de resgate,
+              cuidado e conscientização.
+            </p>
+          </div>
+
+          <div class="card-mvv">
+            <h3>Visão</h3>
+            <p>
+              Ser referência em proteção animal, construindo uma sociedade mais
+              consciente e compassiva, onde todo animal tenha direito a uma vida
+              digna e feliz.
+            </p>
+          </div>
+
+          <div class="card-mvv">
+            <h3>Valores</h3>
+            <p>
+              Amor aos animais, respeito à vida, dedicação, transparência,
+              trabalho em equipe e compromisso com a transformação social.
+            </p>
+          </div>
+        </div>
+
+        <div class="cta-voltar">
+          <a href="index.html">Voltar para o Início</a>
+        </div>
+      </div>
+    </main>
+
+    <div class="creditos">
+      <p><a href="sobreProjeto.html">Projeto desenvolvido por alunos do 2º período de Ciência da Computação - Univértix</a></p>
+    </div>
+  </body>
+</html>

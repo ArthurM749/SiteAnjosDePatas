@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria - ONG Anjos de Patas</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Estilos específicos da página Galeria */
+      .galeria-page {
+        min-height: 100vh;
+        background: linear-gradient(180deg, #fff 0%, #f8f4f9 100%);
+        padding-top: clamp(100px, 15vh, 140px);
+        padding-bottom: clamp(60px, 10vh, 100px);
+      }
+
+      .galeria-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .galeria-header {
+        text-align: center;
+        margin-bottom: clamp(50px, 8vh, 70px);
+      }
+
+      .galeria-header h1 {
+        color: #4b005e;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .galeria-header .subtitle {
+        color: #78114f;
+        font-size: clamp(1rem, 2vw, 1.3rem);
+        font-weight: 500;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* SEÇÃO FILTROS */
+      .filtros {
+        display: flex;
+        justify-content: center;
+        gap: clamp(10px, 2vw, 20px);
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .filtro-btn {
+        padding: clamp(8px, 1.5vw, 12px) clamp(20px, 3vw, 30px);
+        border: 2px solid #518eff;
+        background-color: #fff;
+        color: #518eff;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .filtro-btn:hover,
+      .filtro-btn.ativo {
+        background-color: #518eff;
+        color: #fff;
+      }
+
+      /* GRID DE GALERIA */
+      .galeria-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(20px, 3vw, 30px);
+        margin-bottom: 50px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .galeria-item {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(75, 0, 94, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        background-color: #fff;
+      }
+
+      .galeria-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 30px rgba(75, 0, 94, 0.2);
+      }
+
+      .galeria-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .galeria-info {
+        padding: clamp(15px, 3vw, 20px);
+      }
+
+      .galeria-info h3 {
+        color: #4b005e;
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .galeria-info p {
+        color: #555;
+        font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .galeria-tag {
+        display: inline-block;
+        background-color: #518eff;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+        margin-top: 10px;
+        font-weight: 500;
+      }
+
+      /* SEÇÃO SOBRE A GALERIA */
+      .sobre-galeria {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: clamp(30px, 5vw, 50px);
+        margin-bottom: 40px;
+        box-shadow: 0 4px 20px rgba(75, 0, 94, 0.1);
+      }
+
+      .sobre-galeria h2 {
+        color: #4b005e;
+        font-size: clamp(1.8rem, 4vw, 2.3rem);
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .sobre-galeria p {
+        color: #333;
+        font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        line-height: 1.8;
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      .sobre-galeria p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* MODAL PARA VISUALIZAR IMAGEM */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        animation: fadeIn 0.3s;
+      }
+
+      .modal.ativo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        border-radius: 15px;
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
+        animation: slideIn 0.3s;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .modal-info {
+        padding: clamp(20px, 4vw, 30px);
+      }
+
+      .modal-info h3 {
+        color: #4b005e;
+        font-size: clamp(1.3rem, 3vw, 1.8rem);
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .modal-info p {
+        color: #333;
+        font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 2rem;
+        color: #6c146f;
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition: 0.3s;
+      }
+
+      .close:hover {
+        color: #a14ca1;
+      }
+
+      /* BOTÃO VOLTAR */
+      .cta-voltar {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .cta-voltar a {
+        display: inline-block;
+        padding: clamp(12px, 2vw, 15px) clamp(30px, 5vw, 40px);
+        background-color: #6c146f;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: clamp(1rem, 2vw, 1.1rem);
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(108, 20, 111, 0.3);
+      }
+
+      .cta-voltar a:hover {
+        background-color: #a14ca1;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(108, 20, 111, 0.4);
+      }
+
+      .creditos a{
+        color: #770c72;
+      }
+
+      @media (max-width: 768px) {
+        .galeria-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .filtros {
+          gap: 8px;
+        }
+
+        .filtro-btn {
+          font-size: 0.85rem;
+        }
+      }
+
+      /* PLACEHOLDER VAZIO */
+      .placeholder-vazio {
+        text-align: center;
+        padding: clamp(40px, 8vw, 80px) 20px;
+        background-color: #f8f4f9;
+        border-radius: 15px;
+        border: 2px dashed #518eff;
+        margin-bottom: 50px;
+      }
+
+      .placeholder-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .placeholder-texto {
+        color: #4b005e;
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        font-weight: 500;
+        line-height: 1.8;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topo">
+      <nav>
+        <ul class="menu">
+          <li><img src="img/triangulo-esq.png" alt="" class="triang-esq" /></li>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="quemSomos.html">Quem Somos</a></li>
+          <li><img src="img/logo.png" alt="logo" class="img-logo" /></li>
+          <li><a href="comoAjudar.html">Como Ajudar</a></li>
+          <li><a href="galeria.html" class="active">Galeria</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><img src="img/triangulo-dir.png" alt="" class="triang-dir" /></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="galeria-page">
+      <div class="galeria-container">
+        <div class="galeria-header">
+          <h1>Galeria de Fotos</h1>
+          <p class="subtitle">
+            Conheça os anjos de patas que vivem conosco e veja nosso trabalho em ação
+          </p>
+        </div>
+
+        <div class="sobre-galeria">
+          <h2>Bem-vindo à Nossa Galeria 📸</h2>
+          <p>
+            Aqui você encontra momentos especiais dos nossos animais, nossas ações na comunidade e o dia a dia da ONG Anjos de Patas. Cada foto conta uma história de amor, dedicação e transformação.
+          </p>
+          <p>
+            Através dessas imagens, queremos compartilhar com você a alegria, a resiliência e a esperança que encontramos no olhar de cada animal que cuidamos. Conheça nossos anjinhos e veja o impacto que juntos podemos fazer! 🐾
+          </p>
+        </div>
+
+        <div class="filtros">
+          <button class="filtro-btn ativo" data-filtro="todos">Todos</button>
+          <button class="filtro-btn" data-filtro="cachorros">🐕 Cachorros</button>
+          <button class="filtro-btn" data-filtro="ong">🏢 ONG</button>
+          <button class="filtro-btn" data-filtro="adocoes">💕 Adoções</button>
+        </div>
+
+        <div class="galeria-grid" id="galeriaGrid">
+          <!-- Items serão inseridos pelo JavaScript -->
+        </div>
+
+        <div class="placeholder-vazio" id="placeholderVazio" style="display: none;">
+          <div class="placeholder-content">
+            <p class="placeholder-texto">🐾 Estamos trabalhando muito para trazer novas histórias de adoções! Mal podemos esperar para compartilhar essas alegrias com você. Em breve, mais fotos incríveis! 💕</p>
+          </div>
+        </div>
+
+        <div class="cta-voltar">
+          <a href="index.html">Voltar para o Início</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal para visualizar imagem completa -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <button class="close" onclick="fecharModal()">&times;</button>
+        <img src="" alt="" class="modal-img" id="modalImg" />
+        <div class="modal-info">
+          <h3 id="modalTitulo"></h3>
+          <p id="modalDescricao"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Base de dados das fotos
+      const fotos = [
+        {
+          id: 1,
+          titulo: "Princesa",
+          descricao: "Uma linda cachorra branca com um olhar meigo e carismático. Dócil e carinhosa, está procurando um lar cheio de amor e cuidados.",
+          categoria: "cachorros",
+          imagem: "img_galeria/cachorro1.jpeg"
+        },
+        {
+          id: 2,
+          titulo: "Nosso Espaço de Cuidados",
+          descricao: "Conheça as instalações da ONG onde oferecemos atendimento médico veterinário, vacinações e castração. Um espaço seguro e acolhedor para nossos anjinhos.",
+          categoria: "ong",
+          imagem: "img_galeria/ong1.jpeg"
+        },
+        {
+          id: 3,
+          titulo: "Nossa Estrutura",
+          descricao: "Conheca as instalações da ONG onde nossos animais recebem todo o cuidado necessário.",
+          categoria: "ong",
+          imagem: "img_galeria/ong2.jpeg"
+        },
+        {
+          id: 4,
+          titulo: "Conviva com Nossos Cães",
+          descricao: "Veja nossos queridos cachorros em seu habitat seguro e confortável. Cada um deles aguarda por um lar cheio de amor. Visite-nos e conheça a alegria em cada olhar!",
+          categoria: "ong",
+          imagem: "img_galeria/ong3.jpeg"
+        }
+      ];
+
+      // Renderizar galeria
+      function renderizarGaleria(filtro = "todos") {
+        const grid = document.getElementById("galeriaGrid");
+        const placeholder = document.getElementById("placeholderVazio");
+        grid.innerHTML = "";
+
+        const fotosFiltradas =
+          filtro === "todos" ? fotos : fotos.filter((f) => f.categoria === filtro);
+
+        if (fotosFiltradas.length === 0) {
+          placeholder.style.display = "block";
+        } else {
+          placeholder.style.display = "none";
+        }
+
+        fotosFiltradas.forEach((foto) => {
+          const item = document.createElement("div");
+          item.className = "galeria-item";
+          item.innerHTML = `
+            <img src="${foto.imagem}" alt="${foto.titulo}" onclick="abrirModal(${foto.id})" />
+            <div class="galeria-info">
+              <h3>${foto.titulo}</h3>
+              <p>${foto.descricao}</p>
+              <span class="galeria-tag">${obterLabelCategoria(foto.categoria)}</span>
+            </div>
+          `;
+          grid.appendChild(item);
+        });
+      }
+
+      // Obter label da categoria
+      function obterLabelCategoria(categoria) {
+        const labels = {
+          cachorros: "🐕 Cachorros",
+          ong: "🏢 ONG",
+          adocoes: "💕 Adoções"
+        };
+        return labels[categoria] || categoria;
+      }
+
+      // Filtros
+      document.querySelectorAll(".filtro-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document
+            .querySelectorAll(".filtro-btn")
+            .forEach((b) => b.classList.remove("ativo"));
+          this.classList.add("ativo");
+          renderizarGaleria(this.dataset.filtro);
+        });
+      });
+
+      // Modal
+      function abrirModal(id) {
+        const foto = fotos.find((f) => f.id === id);
+        if (foto) {
+          document.getElementById("modalImg").src = foto.imagem;
+          document.getElementById("modalTitulo").textContent = foto.titulo;
+          document.getElementById("modalDescricao").textContent = foto.descricao;
+          document.getElementById("modal").classList.add("ativo");
+        }
+      }
+
+      function fecharModal() {
+        document.getElementById("modal").classList.remove("ativo");
+      }
+
+      // Fechar modal ao clicar fora
+      document.getElementById("modal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          fecharModal();
+        }
+      });
+
+      // Renderizar na carga
+      renderizarGaleria();
+    </script>
+  </body>
+</html>
+
